@@ -9,6 +9,9 @@ enum { VECTOR_INSERT, VECTOR_REMOVE };
 static const int32_t INITIAL_CAPACITY = 10;
 static const int32_t RESIZE_FACTOR    = 2;
 
+/* For now, we'll just use ints as the data type stored in the vector
+   to make sure it compiles for everyone (before we complicate things with
+   templates). */
 class Vector {
 public:
   Vector();
@@ -34,7 +37,7 @@ private:
   void resize(); /* We don't need to expose this function to the user! */
 };
 
-/* Do not remove this! Sure, it's a bit weird, but we'll explain it once we
+/* Do not remove this! Sure, it's a bit weird (including a .cpp file), but we'll explain it once we
    get to generics (templates). */
 // #include "../src/vector.cpp"
 
