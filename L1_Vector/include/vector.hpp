@@ -4,9 +4,13 @@
 #include "commons.hpp"
 
 /* Enums for resizing the array dynamically. */
-enum { VECTOR_INSERT, VECTOR_REMOVE };
+enum RESIZE_TYPE { RIGHT, LEFT };
 
-static const int32_t INITIAL_CAPACITY = 10;
+/* Flags for adding/removing elements. */
+enum ADD_FLAG { VECTOR_ADD_RESIZE, VECTOR_ADD };
+
+/* I may change these to be [unmodifiable] class members. */
+static const int32_t INITIAL_CAPACITY = 5;
 static const int32_t RESIZE_FACTOR    = 2;
 
 /* For now, we'll just use ints as the data type stored in the vector
@@ -18,23 +22,34 @@ public:
   ~Vector();
 
   /* Returns the size of the vector (how many elements are currently in it.). */
-  size_t getSize() const noexcept;
+  ssize_t getSize() const noexcept;
+
+  /* Returns the capacity of the vector (how many elements can be stored before resizing). */
+  ssize_t getCapacity() const noexcept;
+
+  /* Returns an element at the specified index. */
+  int32_t getElement( ssize_t index ) const;
+
+  /* Returns true if the size is 0, false otherwise. */
+  bool isEmpty() const noexcept;
 
   /* Adds an element to the end of the vector. */
   int32_t addElement( int element ) noexcept;
 
   /* Inserts an element to the specified index of the vector. */
-  int32_t insertElement( int element );
+  void insertElement( int element, ssize_t index );
 
   /* Removes element at index. Exception is thrown if it is out of scope. */
-  int32_t removeElement( size_t index );
+  int32_t removeElement( ssize_t index );
 
 private:
   size_t                 capacity = INITIAL_CAPACITY;
   size_t                 size;
   std::unique_ptr<int[]> arr; /* Create a pointer to our array. */
 
-  void resize(); /* We don't need to expose this function to the user! */
+  void resize( enum RESIZE_TYPE rszType ); /* We don't need to expose this function to the user! */
+  void shift( size_t           offsetIndex,
+              enum RESIZE_TYPE rszType ); /* We don't need to expose this function to the user! */
 };
 
 /* Do not remove this! Sure, it's a bit weird (including a .cpp file), but we'll explain it once we

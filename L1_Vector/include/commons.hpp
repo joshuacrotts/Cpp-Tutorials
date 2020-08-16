@@ -9,7 +9,9 @@
 
 /* C++ exclusive headers.*/
 #include <fstream>
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <sstream>
+#include <stdexcept>
 
 #endif // COMMONS_HPP
