@@ -7,11 +7,7 @@
  */
 Vector::Vector() {
   this->size = 0;
-
-  /* This looks ugly, but it just makes an array of integers.
-     "int" will change later! I decided to use C++ pointers
-     instead of C-style pointers because... future? */
-  this->arr = std::unique_ptr<int[]>{new int[this->capacity]};
+  this->arr  = std::make_unique<int[]>( this->capacity );
 }
 
 /**
@@ -132,9 +128,9 @@ Vector::getElement( size_t index ) const {
 
 /**
  * Determines if the vector is empty (has no elements).
- * 
+ *
  * @param void.
- * 
+ *
  * @return true if the array is empty, false otherwise.
  */
 bool
@@ -145,9 +141,9 @@ Vector::isEmpty( void ) const noexcept {
 /**
  * Adds an element to the end of the vector. If the vector
  * has to be resized,it will be.
- * 
+ *
  * @param element to add.
- * 
+ *
  * @return void.
  */
 void
