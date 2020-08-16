@@ -22,25 +22,25 @@ public:
   ~Vector();
 
   /* Returns the size of the vector (how many elements are currently in it.). */
-  ssize_t getSize() const noexcept;
+  size_t getSize( void ) const noexcept;
 
   /* Returns the capacity of the vector (how many elements can be stored before resizing). */
-  ssize_t getCapacity() const noexcept;
+  size_t getCapacity( void ) const noexcept;
 
   /* Returns an element at the specified index. */
-  int32_t getElement( ssize_t index ) const;
+  int32_t getElement( size_t index ) const;
 
   /* Returns true if the size is 0, false otherwise. */
-  bool isEmpty() const noexcept;
+  bool isEmpty( void ) const noexcept;
 
   /* Adds an element to the end of the vector. */
-  int32_t addElement( int element ) noexcept;
+  void addElement( int element ) noexcept;
 
   /* Inserts an element to the specified index of the vector. */
-  void insertElement( int element, ssize_t index );
+  void insertElement( int element, size_t index );
 
   /* Removes element at index. Exception is thrown if it is out of scope. */
-  int32_t removeElement( ssize_t index );
+  int32_t removeElement( size_t index );
 
 private:
   size_t                 capacity = INITIAL_CAPACITY;

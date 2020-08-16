@@ -86,27 +86,41 @@ Vector::shift( size_t offsetIndex, enum RESIZE_TYPE direction ) {
 
 /**
  *
+ * Returns the logical size of the vector at the time.
+ *
+ * @param void.
+ *
+ * @return size of vector.
+ *
  * This may not be the correct way to supply modifiers after
  * a function, someone correct me!
  */
-ssize_t
-Vector::getSize() const noexcept {
+size_t
+Vector::getSize( void ) const noexcept {
   return this->size;
 }
 
 /**
+ * Returns the logical capacity of the vector at the time.
  *
+ * @param void.
+ *
+ * @return capacity of vector.
  */
-ssize_t
-Vector::getCapacity() const noexcept {
+size_t
+Vector::getCapacity( void ) const noexcept {
   return this->capacity;
 }
 
 /**
+ * Retrieves an element at the specified index.
  *
+ * @param index to retrieve.
+ *
+ * @return data at index.
  */
 int32_t
-Vector::getElement( ssize_t index ) const {
+Vector::getElement( size_t index ) const {
   if ( index < 0 || index >= this->size ) {
     std::ostringstream msg;
     msg << "Error: index " << index << " is out of bounds." << std::endl;
@@ -117,29 +131,43 @@ Vector::getElement( ssize_t index ) const {
 }
 
 /**
- *
+ * Determines if the vector is empty (has no elements).
+ * 
+ * @param void.
+ * 
+ * @return true if the array is empty, false otherwise.
  */
 bool
-Vector::isEmpty() const noexcept {
+Vector::isEmpty( void ) const noexcept {
   return this->size == 0;
 }
 
 /**
- *
+ * Adds an element to the end of the vector. If the vector
+ * has to be resized,it will be.
+ * 
+ * @param element to add.
+ * 
+ * @return void.
  */
-int32_t
+void
 Vector::addElement( int element ) noexcept {
   this->resize( RIGHT );
   this->arr[this->size] = element;
   this->size++;
-  return VECTOR_ADD;
 }
 
 /**
+ * Inserts an element at the specified index. An exception is thrown
+ * if the index is out of bounds.
  *
+ * @param element to insert.
+ * @param index to insert at.
+ *
+ * @return void.
  */
 void
-Vector::insertElement( int element, ssize_t index ) {
+Vector::insertElement( int element, size_t index ) {
   if ( index < 0 || index >= this->size ) {
     std::ostringstream msg;
     msg << "Error: index " << index << " is out of bounds." << std::endl;
@@ -159,10 +187,15 @@ Vector::insertElement( int element, ssize_t index ) {
 }
 
 /**
+ * Removes an element at the specified index. If the array is empty
+ * or the index is out of bounds, an exception is thrown.
  *
+ * @param index of element to remove.
+ *
+ * @return item removed.
  */
 int32_t
-Vector::removeElement( ssize_t index ) {
+Vector::removeElement( size_t index ) {
   if ( index < 0 || index >= this->size ) {
     std::ostringstream msg;
     msg << "Error: index " << index << " is out of bounds." << std::endl;
