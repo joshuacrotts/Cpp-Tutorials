@@ -13,13 +13,13 @@ template <class T> class LinkedList {
 public:
   LinkedList();
   ~LinkedList();
-  size_t getSize() const noexcept;
-  size_t isEmpty() const noexcept;
-  void   addNode( T data );
-  T      removeNode( size_t index );
-  T      getNode( size_t index ) const;
-  T      getFirst() const noexcept;
-  T      getLast() const noexcept;
+  size_t            getSize() const noexcept;
+  size_t            isEmpty() const noexcept;
+  void              addNode( T data );
+  T                 removeNode( size_t index );
+  T                 getNode( size_t index ) const;
+  T                 getFirst() const noexcept;
+  T                 getLast() const noexcept;
 
 private:
   size_t             size;
@@ -115,8 +115,35 @@ LinkedList<T>::addNode( T data ) {
 template <class T>
 T
 LinkedList<T>::removeNode( size_t index ) {
+  if ( index < 0 || index >= this->size ) {
+    std::ostringstream msg;
+    msg << "Error: index " << index << " is out of bounds." << std::endl;
+    throw std::invalid_argument( msg.str() );
+  }
 
-  return nullptr;
+  this->size--;
+  LinkedListNode<T> *node;
+
+  /* Just get the head then reset the pointer. */
+  if ( index == 0 ) {
+    node       = this->head;
+    this->head = this->head->next;
+  } else if ( index == size - 1 ) {
+    /* Grab the tail and reset the pointer. */
+    node             = this->tail;
+    this->tail->next = nullptr;
+    this->tail       = nullptr;
+  } else {
+    LinkedListNode<T> *before = this->head;
+    for ( int i = 0; i < index - 1; i++ ) {
+      before = before->next;
+    }
+
+    node         = before->next;
+    before->next = node->next;
+  }
+
+  return node->data;
 }
 
 /**
@@ -125,8 +152,19 @@ LinkedList<T>::removeNode( size_t index ) {
 template <class T>
 T
 LinkedList<T>::getNode( size_t index ) const {
+  if ( index < 0 || index >= this->size ) {
+    std::ostringstream msg;
+    msg << "Error: index " << index << " is out of bounds." << std::endl;
+    throw std::invalid_argument( msg.str() );
+  }
 
-  return nullptr;
+  /* Traverse until we find the right node. */
+  LinkedListNode<T> *it = this->head;
+  for ( int i = 0; i < index; i++ ) {
+    it = it->next;
+  }
+
+  return it->data;
 }
 
 #endif // LINKEDLIST_HPP

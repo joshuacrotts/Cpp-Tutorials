@@ -4,8 +4,11 @@ int
 main( int argc, char *argv[] ) {
   LinkedList<int> ll;
   ll.addNode( 100 );
-  ll.addNode(200);
-  ll.addNode(300);
+  ll.addNode( 200 );
+  ll.addNode( 300 );
 
-  std::cout << "first: " << ll.getFirst() << std::endl;
+  for ( int i = 0; i < ll.getSize(); i++ ) {
+    int x = ll.getNode( i );
+    std::cout << x << std::endl;
+  }
 }
