@@ -56,7 +56,7 @@ private:
 //================ CONSTRUCTOR/DESTRUCTOR =================//
 /**
  *
- */
+ */>
 template <class T> Vector<T>::Vector() {
   this->size = 0;
   this->arr  = std::make_unique<T[]>( this->capacity );
